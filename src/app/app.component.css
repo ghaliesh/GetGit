@@ -1,0 +1,196 @@
+header {
+  height: 900px;
+  width: 100px;
+}
+
+.wrapper {
+  color: #222;
+  position: absolute;
+  display: grid;
+  left: 50%;
+  top: 7%;
+  padding: 1rem;
+  -ms-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+.main-header {
+  text-align: center;
+}
+
+form {
+  display: grid;
+  grid-template-columns: .7fr .3fr;
+}
+
+.icon {
+  width: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.main-logo {
+  width: 12.5rem;
+}
+
+span {
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+}
+
+.result {
+  padding: 1.6rem;
+  display: grid;
+  margin-bottom: 1.9rem;
+  background: #fff;
+  -webkit-box-shadow: 0 10px 6px -6px #777;
+  -moz-box-shadow: 0 10px 6px -6px #777;
+  box-shadow: 0 10px 6px -6px #777;
+}
+
+.badge {
+  background: #eee7e7;
+  border: 1px solid transparent;
+  border-radius: 1rem;
+  font-size: 0.8rem;
+  margin: 2px;
+  color: #fff;
+  padding: 5px;
+}
+
+.package-title {
+  margin-bottom: 5px;
+}
+
+.green {
+  background-color: #756767;
+}
+
+.redish {
+  background: rgb(168, 33, 33);
+}
+
+.normal {
+  color: #222;
+}
+
+.warn {
+  background: rgb(200, 200, 31);
+  color: #222;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.body {
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+.allowed {
+  background: rgb(56, 124, 71);
+}
+
+.checkbox {
+  display: grid;
+  grid-template-columns: 10rem 10rem 10rem;
+}
+
+.query, .filter {
+  padding: 0;
+  margin-bottom: 2rem;
+  width: 40rem;
+  height: 2rem;
+  outline: none;
+  border: 1px solid rgb(197, 187, 187);
+  padding: 0.9rem;
+  background: whitesmoke;
+  transition: 0.3s all;
+  display: inline-block;
+}
+
+.filter {
+  width: 4rem;
+}
+
+ul {
+  padding: 0;
+}
+
+input:focus {
+  background: white;
+}
+
+.result-header {
+  display: grid;
+  grid-template-columns: 0.9fr 0.1fr;
+}
+
+button {
+  border: 0px solid transparent;
+  padding: 5px;
+  background: #222;
+  color: #fff;
+  border-radius: 15px;
+  opacity: 0.7;
+  position: relative;
+  transition: .3s all;
+  outline: none;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 1;
+  background: #097a2f;
+}
+
+button::before {
+  content: 'Copied';
+  bottom: 100%;
+  position: absolute;
+  width: 100%;
+  opacity: 0;
+  height: 0.8rem;
+  margin-bottom: 2px;
+  border-radius: 15px;
+  left: 0;
+  background: #fff;
+  color: #222;
+}
+
+.main-header h2 {
+  color: rgb(15, 173, 134);
+}
+
+.container {
+  padding-right: 1rem;
+  padding-left: 1rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
