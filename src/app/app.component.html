@@ -1,47 +1,128 @@
-<div class="container">
-  <div class="wrapper">
-    <div class="main-header">
-      <img class="main-logo" src="../../assets/img/github.svg">
-      <h2>GetGit</h2>
-      <h3>Your next google</h3>
+<div class="nav-container">
+  <header>
+    <h1> <a routerLink="/"><img class="app-logo" src="../assets/img/giget-logo.png"></a>
+    </h1>
+    <input id="nav-toggle" class="nav-toggle" type="checkbox">
+    <nav>
+      <ul>
+        <li>
+          <a routerLink='/bookmarks'>
+            Bookmarks
+          </a>
+        </li>
+        <li>
+          <a routerLink="/stackoverclue">
+            StackOverClue
+          </a>
+        </li>
+        <li *ngIf="!(isLoggedIn$| async)">
+          <a (click)="openModel($event)">Login</a>
+        </li>
+        <li *ngIf="!(isLoggedIn$ | async)">
+          <a id="register-btn" (click)="openModel($event)">Register</a>
+        </li>
+        <li *ngIf="isLoggedIn$ | async">
+          <a (click)="logout()">log out</a>
+        </li>
 
-    </div>
-    <form>
-      <input name="query" placeholder="Enter your query and press Enter" (keydown)="handleQuery($event)"
-        type="text" class="query" [(ngModel)]="query">
-      <input class="filter" (keydown)="filterQuery($event)" placeholder="Language" type="text">
-    </form>
-    <ul *ngIf="items">
-      <li *ngFor="let item of items">
-        <div class="result">
-          <div class="result-header">
-            <div class="title">
-              <img class="icon" src="../../assets/img/github-logo.svg">
-              <span class="package-title">
-                <a target="_blank" [href]="item.html_url">{{item.name}} </a>
-                - by
-                <a target="_blank" [href]="item.owner.html_url"> {{item.owner.login}} </a>
-              </span>
-            </div>
-            <button (click)="copy(item.git_url)"> clone</button>
-          </div>
-          <div class="body">
-            <p *ngIf="item.description.length < 200">{{item.description}}</p>
-          </div>
-          <div class="footer">
-            <span class="badge green" *ngIf="item.language">{{item.language}}</span>
-            <span class="badge green" *ngIf="!item.language">unknown lang</span>
-            <span class="badge normal" *ngIf="item.license?.name">{{item?.license?.name}}</span>
-            <span class="badge warn">{{item.open_issues}} issues</span>
-            <span class="badge redish" *ngIf="item.private">private</span>
-            <span class="badge allowed" *ngIf="!item.private">public</span>
-          </div>
-
+      </ul>
+    </nav>
+    <label for="nav-toggle" class="nav-chrisp">
+      <span></span>
+    </label>
+  </header>
+</div>
+<div #registerModel class="model-bg">
+  <div #registerModelContent class="model-content">
+    <img src="../assets/img/login.svg">
+    <div (click)="closeModel($event)" id="close-register" class="cross">+</div>
+    <form [formGroup]="formGroup" class="login-form">
+      <div class="input-div">
+        <input formControlName="name" [ngClass]="{'input-error': name.invalid && name.touched}"
+          type="text" placeholder="Enter your name" required>
+        <div [ngClass]="{'showup': (name.getError('required') && name.touched)}"
+          class="error-message">
+          The field "name" is required
         </div>
-
-      </li>
-    </ul>
-
+        <div [ngClass]="{'showup': (name.getError('minlength') && name.touched)}"
+          class="error-message">
+          The field "name" must be at least 2 letters
+        </div>
+      </div>
+      <div class="input-div">
+        <input [ngClass]="{'input-error': (email.errors && email.touched)}"
+          formControlName="email" type="text" placeholder="Enter your email"
+          required>
+        <div [ngClass]="{'showup': (email.getError('minlength') && email.touched)}"
+          class="error-message">
+          The field "email" must be at least 5 letters
+        </div>
+        <div [ngClass]="{'showup': (email.getError('required') && email.touched)}"
+          class="error-message">
+          The field "email" is required
+        </div>
+        <div [ngClass]="{'showup': (email.getError('email') && email.touched)}"
+          class="error-message">
+          The field "email" must be valid email
+        </div>
+      </div>
+      <div class="input-div">
+        <input formControlName="password" [ngClass]="{'input-error': (password.errors && password.touched)}"
+          type="password" placeholder="Enter your password" required>
+        <div [ngClass]="{'showup': (password.getError('required') && password.touched)}"
+          class="error-message">
+          The field "password" is required
+        </div>
+        <div [ngClass]="{'showup': (password.getError('minlength') && password.touched)}"
+          class="error-message">
+          The field "password" must be at least 5 letters
+        </div>
+      </div>
+      <button [disabled]="formGroup.invalid && formGroup.touched" (click)="register()"
+        class="login-btn">Register</button>
+    </form>
   </div>
+</div>
 
+<div #loginModel id="login-model" class="model-bg">
+  <div #loginModelContent class="model-content">
+    <img src="../assets/img/login.svg">
+    <div (click)="closeModel($event)" id="close-login" class="cross">+</div>
+    <form [formGroup]="formGroup" class="login-form">
+      <div class="input-div">
+        <input [ngClass]="{'input-error': (email.errors && email.touched)}"
+          formControlName="email" type="text" placeholder="Enter your email"
+          required>
+        <div [ngClass]="{'showup': (email.getError('minlength') && email.touched)}"
+          class="error-message">
+          The field "email" must be at least 5 letters
+        </div>
+        <div [ngClass]="{'showup': (email.getError('required') && email.touched)}"
+          class="error-message">
+          The field "email" is required
+        </div>
+        <div [ngClass]="{'showup': (email.getError('email') && email.touched)}"
+          class="error-message">
+          The field "email" must be valid email
+        </div>
+      </div>
+      <div class="input-div">
+        <input formControlName="password" [ngClass]="{'input-error': (password.invalid && password.touched)}"
+          type="password" placeholder="Enter your password" required>
+        <div [ngClass]="{'showup': (password.getError('required') && password.touched)}"
+          class="error-message">
+          The field "password" is required
+        </div>
+        <div [ngClass]="{'showup': (password.getError('minlength') && password.touched)}"
+          class="error-message">
+          The field "password" must be at least 5 letters
+        </div>
+      </div>
+      <button [disabled]="(email.invalid || password.invalid) && formGroup.touched"
+        (click)="login()" class="login-btn">Login</button>
+    </form>
+  </div>
+</div>
+<div class="container">
+  <router-outlet></router-outlet>
 </div>

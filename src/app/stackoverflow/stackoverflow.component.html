@@ -1,0 +1,43 @@
+<div class="wrapper">
+  <header>
+    <div class="main-img">
+      <img class="so-logo" src="../../assets/img/so-logo.png">
+    </div>
+    <h2 class="title">GetGit</h2>
+    <h3>Your next google</h3>
+  </header>
+  <div class="form-section">
+    <form [formGroup]="formGroup">
+      <input name="query" (keydown)="handleQuery($event)" formControlName="query"
+        placeholder="Enter your query and press Enter" type="text" class="query-input">
+      <input class="filter-input" formControlName="filter" (keydown)="filterQuery($event)"
+        placeholder="Language" type="text">
+      <div class="checkbox-filter">
+        <input (change)="filterQuery($event)" id="checkbox" name="answered"
+          formControlName="answered" type="checkbox">
+        <label for="answered">only answered correctly</label>
+      </div>
+    </form>
+  </div>
+  <div *ngIf="stacks" class="result-section">
+    <ul *ngFor="let item of stacks" class="result-list">
+      <li class="list-item shadow">
+        <div class="git">
+          <div class="title">
+            <div>
+              <img class="icon-so" src="../../assets/img/so-icon.png">
+              <span class="package-title">
+                <a target="_blank" [href]="item.title">{{item.title}} </a>
+              </span>
+            </div>
+
+          </div>
+          <div class="tags">
+            <span class="badge green" *ngFor="let i of item.tags">{{i}}</span>
+            <span *ngIf="item.is_answered" class="badge answered"><i class="fas fa-check-circle">Answered</i></span>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

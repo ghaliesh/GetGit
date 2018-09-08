@@ -1,0 +1,51 @@
+<div class="wrapper">
+  <header>
+    <img class="main-logo" src="../../assets/img/github-logo.png">
+    <h2 class="main-header">GetGit</h2>
+    <h3>Your next google</h3>
+  </header>
+  <div class="form-section">
+    <form [formGroup]="formGroup">
+      <input name="query" formControlName="query" placeholder="Enter your query and press Enter"
+        (keydown)="handleQuery($event)" type="text" class="query-input">
+      <input class="filter-input" (keydown)="filterQuery($event)" placeholder="Language"
+        type="text">
+    </form>
+  </div>
+  <div *ngIf="items" class="result-section">
+    <ul *ngFor="let item of items" class="result-list">
+      <li class="list-item shadow">
+        <div class="git">
+          <div class="title">
+            <div>
+              <span class="package-title">
+                <i class="github fab fa-github-alt"></i>
+                <a target="_blank" [href]="item.html_url">{{item.name}} </a>
+                - by
+                <a target="_blank" [href]="item.owner.html_url">
+                  {{item.owner.login}}
+                </a>
+              </span>
+            </div>
+            <button class="btn" (click)="copy(item.git_url)"><i class="fas fa-code-branch"></i>
+              clone</button>
+            <div (click)="bookMark(item, $event)" class="far fa-star btn btn-icon"></div>
+          </div>
+          <div class="body">
+            <p *ngIf="item.description.length < 200">{{item.description}}</p>
+            <p style="opacity: 0.7" *ngIf="item.description.length > 200 || !item.description">No
+              description supplied for this repo</p>
+          </div>
+          <div class="tags">
+            <span class="badge" *ngIf="item.language">{{item.language}}</span>
+            <span class="badge" *ngIf="!item.language">Unkown lang</span>
+            <span class="badge dark" *ngIf="item.license?.name">{{item?.license?.name}}</span>
+            <span class="badge warn">{{item.open_issues}} issues</span>
+            <span class="badge white" *ngIf="item.private">private</span>
+            <span class="badge allowed" *ngIf="!item.private">public</span>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

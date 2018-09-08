@@ -1,22 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
 
 :root {
+  --primary: #010A26;
+  --secondary: #011640;
+  --warn: #E83338;
+  --info: #B4D6F2;
   --light: #fff;
+  --dark: #222;
 }
 
 html {
   font-family: 'Montserrat', sans-serif;
 }
 
+a {
+  text-decoration: none;
+}
+
 body {
   padding: 0;
   margin: 0;
-  background: #ccc;
   width: 100%;
+  background: #ccc;
   height: 100%;
 }
 
 ul {
-  margin-top: 0.4rem;
   list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
 }
